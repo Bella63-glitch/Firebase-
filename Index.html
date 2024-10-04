@@ -1,3 +1,11 @@
+
+
+
+
+
+
+
+
 <!doctype html>
 <html lang="en"> 
  <head> 
@@ -5,12 +13,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
   <title>Firebase Realtime Database</title> <!-- Include Firebase SDKs --> 
   <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js"></script> 
-  <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-database.js"></script> 
- </head> 
- <body> 
-  <h1>Add Property Information</h1> <!-- Button to trigger data addition --> <button onclick="addData()">Add Property Information</button> 
-  <script>
-    // Your web app's Firebase configuration
+  <script src="https:/<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Firebase Realtime Database Example</title>
+    <!-- Include Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-database.js"></script>
+</head>
+<body>
+
+<h1>Add Property Information</h1>
+<button id="addDataBtn">Add Property Information</button>
+
+<script>
+    // Firebase configuration
     const firebaseConfig = {
         apiKey: "AIzaSyBFcaYolaeuZ5QRUt5qS9gTFf4GW-LYIZY",
         authDomain: "legacy-genuine-properties.firebaseapp.com",
@@ -24,16 +43,11 @@
 
     // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
-
-    // Get a reference to the database
     const database = firebase.database();
 
-    // Function to add property information
+    // Function to add data to the database
     function addData() {
-        // Reference to the root of the database
         const dbRef = database.ref('/');
-
-        // Example data for categories and subcategories
         const data = {
             Lands: {
                 "Residential Lands": {},
@@ -70,7 +84,6 @@
             }
         };
 
-        // Push data to the root of the database
         dbRef.set(data, function(error) {
             if (error) {
                 console.error('Data could not be saved: ' + error);
@@ -79,6 +92,10 @@
             }
         });
     }
-</script> 
- 
-</body></html>
+
+    // Attach event listener to the button
+    document.getElementById('addDataBtn').addEventListener('click', addData);
+</script>
+
+</body>
+</html>
