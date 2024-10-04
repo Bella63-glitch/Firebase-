@@ -2,9 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Upload Property</title>
+    <title>Setup Categories</title>
 
     <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/10.14.0/firebase-app.js"></script>
@@ -26,43 +25,67 @@
         // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
 
-        // Function to upload property
-        function uploadProperty() {
-            const database = firebase.database(); // Get a reference to the database
-            const propertyRef = database.ref('properties/'); // Define the path in the database
+        // Function to set up categories and subcategories
+        function setupCategories() {
+            const database = firebase.database(); // Reference to the database
+            const categoriesRef = database.ref('categories/'); // Path to categories
 
-            // Sample data for the property
-            const newProperty = {
-                title: document.getElementById('title').value,
-                price: document.getElementById('price').value
+            // Define the categories and subcategories structure
+            const categoriesData = {
+                "Lands": {
+                    "Residential Lands": {},
+                    "Commercial Lands": {},
+                    "Industrial Lands": {}
+                },
+                "Residential": {
+                    "Apartment": {},
+                    "Mansionette": {},
+                    "Bungalows": {},
+                    "Villas": {},
+                    "Farmhouse": {}
+                },
+                "Commercial": {
+                    "Offices": {},
+                    "Institution": {},
+                    "Shopping": {},
+                    "Hotels": {},
+                    "Special Purpose": {}
+                },
+                "Industrial": {
+                    "Factories": {},
+                    "Warehouse/Distribution": {},
+                    "Flexible Spaces": {},
+                    "Special Purpose": {}
+                },
+                "Agriculture": {
+                    "Green Homes": {},
+                    "Flower Homes": {},
+                    "Flexible Spaces": {}
+                },
+                "Government": {
+                    "Affordable Homes": {}
+                }
             };
 
-            // Push the new property data to Firebase
-            propertyRef.push(newProperty)
+            // Push the structure to Firebase
+            categoriesRef.set(categoriesData)
             .then(() => {
-                console.log("Property added successfully");
-                alert("Property added successfully");
+                console.log("Categories and subcategories added successfully");
+                alert("Categories and subcategories added successfully");
             })
             .catch(error => {
-                console.error("Error adding property: ", error);
-                alert("Error adding property: " + error.message);
+                console.error("Error adding categories: ", error);
+                alert("Error adding categories: " + error.message);
             });
         }
     </script>
 </head>
 <body>
 
-    <h1>Add New Property</h1>
+    <h1>Setup Categories in Firebase</h1>
 
-    <!-- Form to input property details -->
-    <label for="title">Property Title:</label>
-    <input type="text" id="title" name="title"><br><br>
-
-    <label for="price">Property Price:</label>
-    <input type="number" id="price" name="price"><br><br>
-
-    <!-- Button to trigger the upload function -->
-    <button onclick="uploadProperty()">Upload Property</button>
+    <!-- Button to trigger the category setup -->
+    <button onclick="setupCategories()">Setup Categories</button>
 
 </body>
 </html>
