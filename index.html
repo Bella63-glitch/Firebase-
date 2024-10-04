@@ -1,93 +1,68 @@
-<!doctype html>
-<html lang="en"> 
- <head> 
-  <meta charset="UTF-8"> 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-  <title>Firebase Realtime Database</title> <!-- Include Firebase SDKs --> 
-  <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js"></script> 
-  <script src="https:/<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Firebase Realtime Database Example</title>
-    <!-- Include Firebase SDK -->
-    <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-database.js"></script>
+    <title>Upload Property</title>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.14.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.14.0/firebase-database.js"></script>
+
+    <script>
+        // Your Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyBFcaYolaeuZ5QRUt5qS9gTFf4GW-LYIZY",
+            authDomain: "legacy-genuine-properties.firebaseapp.com",
+            databaseURL: "https://legacy-genuine-properties-default-rtdb.firebaseio.com",
+            projectId: "legacy-genuine-properties",
+            storageBucket: "legacy-genuine-properties.appspot.com",
+            messagingSenderId: "795578734998",
+            appId: "1:795578734998:web:5a06078443af3bec4ee5b7",
+            measurementId: "G-RRZ7M9TW8T"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+
+        // Function to upload property
+        function uploadProperty() {
+            const database = firebase.database(); // Get a reference to the database
+            const propertyRef = database.ref('properties/'); // Define the path in the database
+
+            // Sample data for the property
+            const newProperty = {
+                title: document.getElementById('title').value,
+                price: document.getElementById('price').value
+            };
+
+            // Push the new property data to Firebase
+            propertyRef.push(newProperty)
+            .then(() => {
+                console.log("Property added successfully");
+                alert("Property added successfully");
+            })
+            .catch(error => {
+                console.error("Error adding property: ", error);
+                alert("Error adding property: " + error.message);
+            });
+        }
+    </script>
 </head>
 <body>
 
-<h1>Add Property Information</h1>
-<button id="addDataBtn">Add Property Information</button>
+    <h1>Add New Property</h1>
 
-<script>
-    // Firebase configuration
-    const firebaseConfig = {
-        apiKey: "AIzaSyBFcaYolaeuZ5QRUt5qS9gTFf4GW-LYIZY",
-        authDomain: "legacy-genuine-properties.firebaseapp.com",
-        databaseURL: "https://legacy-genuine-properties-default-rtdb.firebaseio.com",
-        projectId: "legacy-genuine-properties",
-        storageBucket: "legacy-genuine-properties.appspot.com",
-        messagingSenderId: "795578734998",
-        appId: "1:795578734998:web:5a06078443af3bec4ee5b7",
-        measurementId: "G-RRZ7M9TW8T"
-    };
+    <!-- Form to input property details -->
+    <label for="title">Property Title:</label>
+    <input type="text" id="title" name="title"><br><br>
 
-    // Initialize Firebase
-    firebase.initializeApp(firebaseConfig);
-    const database = firebase.database();
+    <label for="price">Property Price:</label>
+    <input type="number" id="price" name="price"><br><br>
 
-    // Function to add data to the database
-    function addData() {
-        const dbRef = database.ref('/');
-        const data = {
-            Lands: {
-                "Residential Lands": {},
-                "Commercial Lands": {},
-                "Industrial Lands": {}
-            },
-            Residential: {
-                Apartment: {},
-                Mansionette: {},
-                Bungalows: {},
-                Villas: {},
-                Farmhouse: {}
-            },
-            Commercial: {
-                Offices: {},
-                Institution: {},
-                Shopping: {},
-                Hotels: {},
-                "Special Purpose": {}
-            },
-            Industrial: {
-                Factories: {},
-                "Warehouse/Distribution": {},
-                "Flexible Spaces": {},
-                "Special Purpose": {}
-            },
-            Agriculture: {
-                "Green Homes": {},
-                "Flower Homes": {},
-                "Flexible Spaces": {}
-            },
-            Government: {
-                "Affordable Homes": {}
-            }
-        };
-
-        dbRef.set(data, function(error) {
-            if (error) {
-                console.error('Data could not be saved: ' + error);
-            } else {
-                console.log('Data added successfully.');
-            }
-        });
-    }
-
-    // Attach event listener to the button
-    document.getElementById('addDataBtn').addEventListener('click', addData);
-</script>
+    <!-- Button to trigger the upload function -->
+    <button onclick="uploadProperty()">Upload Property</button>
 
 </body>
 </html>
