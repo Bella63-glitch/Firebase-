@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Setup Categories</title>
+    <title>Firebase Categories Setup</title>
 
-    <!-- Firebase SDK -->
-    <script src="https://www.gstatic.com/firebasejs/10.14.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.14.0/firebase-database.js"></script>
+    <!-- Firebase JS SDK -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
 
     <script>
-        // Your Firebase configuration
-        const firebaseConfig = {
+        // Firebase configuration (your actual configuration is used here)
+        var firebaseConfig = {
             apiKey: "AIzaSyBFcaYolaeuZ5QRUt5qS9gTFf4GW-LYIZY",
             authDomain: "legacy-genuine-properties.firebaseapp.com",
             databaseURL: "https://legacy-genuine-properties-default-rtdb.firebaseio.com",
@@ -27,11 +27,11 @@
 
         // Function to set up categories and subcategories
         function setupCategories() {
-            const database = firebase.database(); // Reference to the database
-            const categoriesRef = database.ref('categories/'); // Path to categories
+            var database = firebase.database(); // Reference to the database
+            var categoriesRef = database.ref('categories/'); // Path to categories
 
             // Define the categories and subcategories structure
-            const categoriesData = {
+            var categoriesData = {
                 "Lands": {
                     "Residential Lands": {},
                     "Commercial Lands": {},
@@ -73,7 +73,7 @@
                 console.log("Categories and subcategories added successfully");
                 alert("Categories and subcategories added successfully");
             })
-            .catch(error => {
+            .catch(function (error) {
                 console.error("Error adding categories: ", error);
                 alert("Error adding categories: " + error.message);
             });
